@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>MCdonalds</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;800;900&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root { color-scheme:light; --red:#da291c; --red-d:#b01f14; --yellow:#ffc72c; --ink:#2b2118; --muted:#6b5f55; --soft:#fff4c9; --line:#eadfc4;
+          --head:"Cairo","Segoe UI",Tahoma,sans-serif; --body:"Tajawal","Segoe UI",Tahoma,sans-serif; box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px); }
+  html { scroll-padding-top:env(safe-area-inset-top,0px); }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  html { scroll-behavior:smooth; }
+  body { font-family:var(--body); color:var(--ink); background:#fff; line-height:1.8; font-size:18px; }
+  button { font:inherit; cursor:pointer; border:0; }
+  :focus-visible { outline:3px solid var(--ink); outline-offset:3px; }
+  h1,h2,h3 { font-family:var(--head); line-height:1.25; }
+
+  header { position:sticky; top:env(safe-area-inset-top,0px); z-index:20; background:var(--red); color:#fff; display:flex; align-items:center; gap:14px; padding:10px 5vw; }
+  .logo { font-family:var(--head); font-weight:900; font-size:24px; background:var(--yellow); color:var(--red); padding:0 14px; border-radius:10px; }
+  header nav { display:flex; gap:4px; margin-inline-end:auto; overflow-x:auto; }
+  header nav a { color:#fff; text-decoration:none; padding:4px 12px; border-radius:99px; font-weight:500; white-space:nowrap; font-size:16px; }
+  header nav a:hover { background:var(--red-d); }
+  .pill { background:var(--yellow); color:var(--ink); border-radius:99px; padding:3px 16px; font-weight:700; font-size:16px; white-space:nowrap; }
+  .pill.cart { background:#fff; }
+
+  .hero { background:var(--yellow); padding:64px 5vw 72px; display:grid; grid-template-columns:1.1fr .9fr; gap:30px; align-items:center; overflow:hidden; }
+  .hero h1 { font-weight:900; font-size:clamp(42px,7vw,84px); color:var(--red); }
+  .hero p { font-size:21px; max-width:32ch; margin:14px 0 26px; font-weight:500; }
+  .btn { display:inline-block; background:var(--red); color:#fff; font-weight:700; padding:11px 30px; border-radius:99px; text-decoration:none; transition:background .15s, transform .15s; }
+  .btn:hover { background:var(--red-d); transform:translateY(-2px); }
+  .btn.alt { background:var(--ink); }
+  .stack { font-size:clamp(90px,17vw,200px); text-align:center; line-height:1; animation:bob 3.2s ease-in-out infinite; filter:drop-shadow(0 14px 0 #0000001a); }
+  @keyframes bob { 50% { transform:translateY(-14px) rotate(-3deg); } }
+
+  section { padding:72px 5vw; }
+  .wrap { max-width:1100px; margin:0 auto; }
+  h2 { font-size:clamp(30px,4.6vw,46px); font-weight:900; color:var(--red); }
+  .sub { color:var(--muted); margin:6px 0 32px; }
+  .tint { background:var(--soft); }
+
+  .offers { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:18px; }
+  .offer { background:#fff; border:2px dashed var(--red); border-radius:16px; padding:22px; display:flex; flex-direction:column; gap:6px; }
+  .offer b { font-family:var(--head); font-size:30px; color:var(--red); }
+  .offer small { color:var(--muted); }
+  .offer button { margin-top:auto; background:var(--ink); color:#fff; padding:8px 18px; border-radius:99px; font-weight:700; }
+  .offer button:disabled { background:#b9b0a4; cursor:default; }
+
+  .points { display:grid; grid-template-columns:1fr 1fr; gap:36px; align-items:center; }
+  .big { font-family:var(--head); font-weight:900; font-size:clamp(64px,10vw,110px); line-height:1; color:var(--red); }
+  .bar { height:18px; background:#fff; border:2px solid var(--ink); border-radius:99px; overflow:hidden; margin:16px 0 8px; }
+  .bar i { display:block; height:100%; width:0; background:var(--red); transition:width .4s; }
+  .tiers { display:flex; justify-content:space-between; font-size:15px; font-weight:700; color:var(--muted); }
+
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:18px; }
+  .meal { border:2px solid var(--line); border-radius:18px; padding:22px; text-align:center; transition:border-color .15s, transform .15s; background:#fff; }
+  .meal:hover { border-color:var(--red); transform:translateY(-4px); }
+  .meal .e { font-size:70px; line-height:1.1; }
+  .meal h3 { font-size:21px; margin-top:6px; }
+  .meal p { color:var(--muted); font-size:15px; min-height:52px; line-height:1.6; }
+  .meal .row { display:flex; justify-content:space-between; align-items:center; margin-top:10px; }
+  .price { font-family:var(--head); font-weight:800; font-size:22px; }
+  .add { background:var(--yellow); color:var(--ink); font-weight:700; padding:6px 18px; border-radius:99px; }
+  .add:hover { background:#ffb400; }
+
+  .hm { background:var(--red); color:#fff; border-radius:28px; padding:40px; display:grid; grid-template-columns:.8fr 1.2fr; gap:32px; align-items:center; }
+  .hm h2 { color:var(--yellow); }
+  .hm .box { font-size:130px; text-align:center; line-height:1; }
+  .hm fieldset { border:0; margin-bottom:14px; }
+  .hm legend { font-weight:700; margin-bottom:4px; color:var(--yellow); }
+  .chips { display:flex; flex-wrap:wrap; gap:8px; }
+  .chips label { cursor:pointer; }
+  .chips input { position:absolute; opacity:0; }
+  .chips span { display:inline-block; padding:3px 16px; border-radius:99px; border:2px solid #fff; font-size:16px; }
+  .chips input:checked + span { background:var(--yellow); color:var(--ink); border-color:var(--yellow); font-weight:700; }
+  .chips input:focus-visible + span { outline:3px solid #fff; outline-offset:2px; }
+  .hm .total { display:flex; align-items:center; gap:18px; margin-top:8px; }
+  .btn2{margin-bottom: 5px;}
+  .hm .add { background:var(--yellow); }
+
+  .filters { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:24px; }
+  .filters button { background:#fff; border:2px solid var(--ink); border-radius:99px; padding:2px 20px; font-weight:700; color:var(--ink); }
+  .filters button[aria-pressed=true] { background:var(--red); border-color:var(--red); color:#fff; }
+  .deal .e { font-size:46px; letter-spacing:2px; }
+  .inc { list-style:none; text-align:start; font-size:15px; line-height:1.7; margin:8px 0 4px; padding-top:8px; border-top:1px dashed var(--line); }
+  .inc li::before { content:"+ "; color:var(--red); font-weight:800; }
+  .old { color:var(--muted); font-size:15px; margin-inline-start:6px; }
+  .tag { display:inline-block; background:var(--yellow); border-radius:99px; padding:0 12px; font-size:13px; font-weight:700; }
+  .dl { display:grid; grid-template-columns:1fr 1fr; gap:36px; align-items:start; }
+  .dl form { display:grid; gap:14px; background:#fff; border:2px solid var(--line); border-radius:18px; padding:24px; }
+  .dl label { display:grid; gap:4px; font-weight:700; font-size:16px; }
+  .dl input, .dl select { font:inherit; font-weight:400; padding:8px 12px; border:2px solid var(--line); border-radius:10px; background:#fff; }
+  .dl .pay { border:0; display:flex; flex-wrap:wrap; gap:8px; }
+  .dl .pay legend { font-weight:700; font-size:16px; margin-bottom:6px; }
+  .dl .pay span { border-color:var(--ink); }
+  .dl .pay input:checked + span { background:var(--red); border-color:var(--red); color:#fff; }
+  .dl .btn { justify-self:start; }
+  .dl .btn:disabled { background:#b9b0a4; transform:none; cursor:default; }
+  .dlsum { font-weight:700; font-size:19px; margin-bottom:18px; }
+  .track { list-style:none; position:relative; padding-inline-start:38px; }
+  .track::before { content:""; position:absolute; inset-block:10px; inset-inline-start:11px; width:3px; background:var(--line); }
+  .track li { position:relative; padding:8px 0; color:var(--muted); font-weight:500; transition:color .3s; }
+  .track li::before { content:""; position:absolute; inset-inline-start:-38px; top:12px; width:25px; height:25px; border-radius:50%; background:#fff; border:3px solid var(--line); transition:.3s; }
+  .track li.on { color:var(--ink); font-weight:700; }
+  .track li.on::before { background:var(--red); border-color:var(--red); }
+
+  .branch { display:flex; flex-wrap:wrap; gap:12px; align-items:center; background:var(--soft); border:2px dashed var(--red); border-radius:14px; padding:12px 18px; margin-bottom:22px; font-weight:700; }
+  .branch .btn { margin:0; padding:4px 20px; }
+  .branch .ok { color:#127a3d; }
+  .err { color:var(--red); font-weight:700; margin:0; }
+  .err a { color:inherit; }
+  .dl input.bad, .dl select.bad { border-color:var(--red); }
+  .applepay { background:#000 !important; color:#fff; }
+  .applepay:hover { background:#222 !important; }
+  .dl .btn.applepay:disabled, dialog .btn.applepay:disabled { background:#777 !important; }
+  dialog label { display:grid; gap:4px; font-weight:700; font-size:16px; margin:12px 0; }
+  dialog input { font:inherit; font-weight:400; padding:8px 12px; border:2px solid var(--line); border-radius:10px; }
+  dialog p { margin-bottom:12px; color:var(--muted); }
+  dialog .btn { margin-inline-end:8px; }
+  .tbar { height:12px; max-width:440px; margin:0 auto 14px; background:var(--line); border-radius:99px; overflow:hidden; }
+  .tbar i { display:block; height:100%; width:100%; background:var(--red); transition:width 1s linear; }
+
+  .toy { display:flex; align-items:center; gap:22px; margin:0 0 16px; padding:34px 6px 0; }
+  .fig { position:relative; width:64px; height:84px; border-radius:26px 26px 12px 12px; display:grid; place-items:center; font-family:var(--head); font-weight:900; font-size:32px; flex:none; transition:background .2s; }
+  .fig::before { content:""; position:absolute; top:-30px; left:50%; transform:translateX(-50%); width:34px; height:34px; border-radius:50%; background:#ffe0b8; border:3px solid #0003; }
+  .fig::after { content:"⚽"; position:absolute; bottom:-12px; inset-inline-end:-26px; font-size:26px; }
+  .fig.messi { background:repeating-linear-gradient(90deg,#75aadb 0 11px,#fff 11px 22px); color:#1b2a41; }
+  .fig.ronaldo { background:linear-gradient(90deg,#0b6b3a 0 22%,#c8102e 22% 100%); color:#fff; }
+  .fig.mystery { background:var(--yellow); color:var(--red); }
+  .toy p { font-size:16px; color:#ffe9e6; }
+
+  .game { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; max-width:440px; margin:0 auto 18px; }
+  .card { aspect-ratio:1; border-radius:14px; background:var(--red); color:transparent; font-size:44px; display:grid; place-items:center; transition:background .2s, transform .2s; }
+  .card.up { background:#fff; color:inherit; border:2px solid var(--red); transform:rotateY(0); }
+  .card.done { background:var(--yellow); color:inherit; }
+  .gbar { text-align:center; font-weight:700; }
+  .gbar .btn { margin-inline-start:12px; padding:4px 20px; }
+
+  dialog { margin:auto; border:0; border-radius:20px; padding:26px; width:min(440px,92vw); }
+  dialog::backdrop { background:#0008; }
+  dialog h3 { font-size:26px; color:var(--red); margin-bottom:10px; }
+  .line { display:flex; justify-content:space-between; gap:12px; padding:8px 0; border-bottom:1px solid var(--line); }
+  .line button { background:none; color:var(--red); font-weight:700; }
+  .tot { display:flex; justify-content:space-between; font-weight:800; font-size:22px; margin:14px 0; }
+  .toast { position:fixed; inset-block-end:24px; inset-inline:0; margin:auto; width:max-content; max-width:90vw; background:var(--ink); color:#fff; padding:10px 24px; border-radius:99px; opacity:0; transform:translateY(20px); transition:.3s; pointer-events:none; z-index:50; }
+  .toast.on { opacity:1; transform:none; }
+
+  footer { background:var(--ink); color:#cfc5b8; padding:28px 5vw; text-align:center; font-size:14px; }
+
+  @media (max-width:760px) {
+    body { font-size:17px; }
+    .hero, .points, .hm, .dl { grid-template-columns:1fr; }
+    .hm { padding:26px; }
+    .hm .box { font-size:90px; }
+    section { padding:52px 5vw; }
+  }
+  @media (prefers-reduced-motion:reduce) { *{ animation:none !important; transition:none !important; } html{ scroll-behavior:auto; } }
+</style>
+</head>
+<body>
+
+<header>
+  <span class="logo">M</span>
+  <nav aria-label="التنقل">
+    <a href="#offers">العروض</a><a href="#points">النقاط</a><a href="#meals">الوجبات</a><a href="#delivery">ماك ديليفري</a><a href="#happy">هابي ميل</a><a href="#play">اللعبة</a>
+  </nav>
+  <span class="pill" aria-live="polite">⭐ <span id="pts">0</span> نقطة</span>
+  <button class="pill cart" id="cartBtn">🛒 <span id="cnt">0</span></button>
+</header>
+
+<div class="hero">
+  <div>
+    <h1>جعان؟ إحنا جاهزين!</h1>
+    <p>اطلب وجبتك المفضلة، اجمع نقاط مع كل طلب، واستمتع بعروض كل يوم.</p>
+    <a class="btn" href="#meals">اطلب دلوقتي</a>
+  </div>
+  <div class="stack" aria-hidden="true">🍔🍟</div>
+</div>
+
+<section id="offers"><div class="wrap">
+  <h2>عروض النهاردة</h2>
+  <p class="sub">كل عرض وجبة كاملة مجمّعة (ساندوتش + بطاطس + مشروب) بسعر أوفر، وهي متاحة جوه الفرع بس بعد مسح QR code.</p>
+  <div class="branch" id="branchBar"></div>
+  <div class="filters" id="filters" role="group" aria-label="نوع العروض"></div>
+  <div class="grid" id="dealList"></div>
+</div></section>
+
+<section id="points" class="tint"><div class="wrap points">
+  <div>
+    <h2>نقاطك</h2>
+    <p class="sub" style="margin-bottom:0">كل 1 جنيه بتصرفه = نقطة، والنقاط بتتضاف بعد ما تدفع. وكل ما تجمع أكتر، المكافآت بتبقى أحلى.</p>
+    <div class="big" id="bigPts">0</div>
+  </div>
+  <div>
+    <b id="nextTxt">ابدأ بجمع أول نقاطك</b>
+    <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" id="bar"><i id="fill"></i></div>
+    <div class="tiers"><span>0</span><span>100 – بطاطس</span><span>250 – ساندوتش</span><span>500 – وجبة</span></div>
+  </div>
+  <div style="grid-column:1/-1">
+    <h3 style="font-size:26px;margin-bottom:6px">استبدل نقاطك</h3>
+    <p class="sub" style="margin-bottom:18px">اختار مكافأة من دي، وهتتخصم النقاط من رصيدك.</p>
+    <div class="offers" id="offerList"></div>
+  </div>
+</div></section>
+
+<section id="meals"><div class="wrap">
+  <h2>الوجبات</h2>
+  <p class="sub">أضف وجبتك للسلة، وهتكسب نقاطك بعد ما تدفع.</p>
+  <div class="grid" id="mealList"></div>
+</div></section>
+
+<section id="delivery"><div class="wrap">
+  <h2>ماك ديليفري</h2>
+  <p class="sub">اطلب من مكانك، ويوصلك ساخن في حوالي 30 دقيقة. التوصيل مجاني للطلبات من 600 ج.م، وغير كده 15 ج.م.</p>
+  <div class="dl">
+    <form id="dlForm" novalidate>
+      <label>المنطقة
+        <select id="area" required>
+          <option value="">اختار منطقتك</option><option>وسط البلد</option><option>المعادي</option><option>مدينة نصر</option><option>الجيزة</option><option>شبين الكوم</option>
+        </select></label>
+      <label>العنوان بالتفصيل<input id="addr" required placeholder="اسم الشارع ورقم العمارة والدور"></label>
+      <label>رقم الموبايل<input id="phone" type="tel" required inputmode="numeric" pattern="[0-9]{10,12}" placeholder="01XXXXXXXXX"></label>
+      <fieldset class="chips pay"><legend>طريقة الدفع</legend>
+        <label><input type="radio" name="pay" value="Apple Pay" checked><span>Apple Pay – ادفع دلوقتي</span></label>
+        <label><input type="radio" name="pay" value="كاش"><span>كاش عند الاستلام</span></label>
+      </fieldset>
+      <button class="btn applepay" id="dlGo" type="submit">ادفع بـ Apple Pay</button>
+      <p id="dlErr" class="err" role="alert" hidden></p>
+    </form>
+    <div>
+      <p id="dlSum" class="dlsum" role="status">ضيف وجباتك للسلة، وبعدها اضغط اطلب توصيل.</p>
+      <ol class="track" id="track">
+        <li>تم استلام الطلب</li><li>بيتحضّر في المطعم</li><li>المندوب في الطريق</li><li>وصل! بالهنا والشفا</li>
+      </ol>
+    </div>
+  </div>
+</div></section>
+
+<section id="happy" class="tint"><div class="wrap">
+  <div class="hm">
+    <div class="box" aria-hidden="true">🎁</div>
+    <div>
+      <h2>هابي ميل</h2>
+      <p style="margin-bottom:16px">ركّب وجبة الأطفال بنفسك، ومعاها هدية مفاجأة.</p>
+      <fieldset><legend>الساندوتش</legend><div class="chips">
+        <label><input type="radio" name="main" value="برجر صغير" checked><span>برجر صغير</span></label>
+        <label><input type="radio" name="main" value="ناجتس 4 قطع"><span>ناجتس 4 قطع</span></label></div></fieldset>
+      <fieldset><legend>الجنب</legend><div class="chips">
+        <label><input type="radio" name="side" value="بطاطس" checked><span>بطاطس</span></label>
+        <label><input type="radio" name="side" value="تفاح شرائح"><span>تفاح شرائح</span></label></div></fieldset>
+      <fieldset><legend>المشروب</legend><div class="chips">
+        <label><input type="radio" name="drink" value="عصير" checked><span>عصير</span></label>
+        <label><input type="radio" name="drink" value="لبن"><span>لبن</span></label>
+        <label><input type="radio" name="drink" value="مياه"><span>مياه</span></label></div></fieldset>
+      <fieldset><legend>الهدية</legend><div class="chips">
+        <label><input type="radio" name="toy" value="messi"><span>مجسّم ميسي</span></label>
+        <label><input type="radio" name="toy" value="ronaldo"><span>مجسّم رونالدو</span></label>
+        <label><input type="radio" name="toy" value="mystery" checked><span>مفاجأة</span></label></div></fieldset>
+      <div class="toy"><div class="fig mystery" id="fig" aria-hidden="true">?</div><p id="toyTxt">هدية مفاجأة جوه العلبة.</p></div>
+      <div class="total"><span class="price">70 ج.م</span><button class="add" id="hmAdd">أضف الهابي ميل</button></div>
+    </div>
+  </div>
+</div></section>
+
+<section id="play"><div class="wrap" style="text-align:center">
+  <h2>لعبة الذاكرة</h2>
+  <p class="sub">عندك دقيقة واحدة توصّل كل زوجين متشابهين. لو كسبت، بتاخد 30 نقطة وهدية (بطاطس أو بيبسي) في السلة!</p>
+  <div class="tbar" aria-hidden="true"><i id="tbar"></i></div>
+  <div class="game" id="game"></div>
+  <div class="gbar">الوقت: <span id="time">60</span> ثانية &nbsp;|&nbsp; الحركات: <span id="moves">0</span> <button class="btn alt" id="again">لعبة جديدة</button></div>
+  <p id="prize" class="dlsum" role="status" style="margin:16px 0 0"></p>
+</div></section>
+
+<dialog id="dlg">
+  <h3>سلتك</h3>
+  <div id="cartItems"></div>
+  <div class="tot"><span>الإجمالي</span><span id="total">0 ج.م</span></div>
+  <button class="btn btn2" id="checkout">كمّل الطلب (توصيل ودفع)</button>
+  <button class="btn alt" id="close">إغلاق</button>
+</dialog>
+<dialog id="qr">
+  <h3>امسح QR الفرع</h3>
+  <p id="qrMsg">وجّه الكاميرا ناحية الـ QR code الموجود في الفرع.</p>
+  <video id="cam" playsinline muted style="width:100%;border-radius:14px;background:#000;display:none"></video>
+  <label>أو اكتب كود الفرع المكتوب تحت الـ QR (للتجربة: MCD-BRANCH-01)
+    <input id="qrCode" placeholder="MCD-BRANCH-01" autocomplete="off"></label>
+  <button class="btn" id="qrOk">تأكيد الكود</button>
+  <button class="btn alt" id="qrClose">إغلاق</button>
+</dialog>
+<dialog id="pay">
+  <h3>الدفع بـ Apple Pay</h3>
+  <p>محاكاة تجريبية، مفيش خصم حقيقي ومش بنطلب أي بيانات كارت.</p>
+  <div class="tot"><span>المبلغ</span><span id="payAmt"></span></div>
+  <button class="btn applepay" id="payOk">تأكيد الدفع</button>
+  <button class="btn alt" id="payNo">إلغاء</button>
+</dialog>
+<div class="toast" id="toast" role="status"></div>
+
+<footer>موقع تصميم تجريبي وغير رسمي، الأسعار والعروض للتوضيح فقط، وليس له علاقة بالشركة الأصلية. مجسّمات اللاعبين رسومات توضيحية غير مرخّصة.</footer>
+
+<script>
+const meals = [
+  {n:'برجر لحم كلاسيك', e:'🍔', p:80,  d:'برجر لحم مشوي مع جبنة وخس وصوص خاص.'},
+  {n:'دبل تشيز برجر',   e:'🍔', p:110, d:'طبقتين لحم وجبنة مضاعفة للجعان بجد.'},
+  {n:'تشيكن كرسبي',     e:'🍗', p:95, d:'صدور دجاج مقرمشة مع مايونيز.'},
+  {n:'ناجتس 9 قطع',     e:'🍗', p:70,  d:'قطع دجاج ذهبية مع صوصين.'},
+  {n:'بطاطس كبيرة',     e:'🍟', p:38,  d:'مقرمشة من برة وطرية من جوه.'},
+  {n:'آيس كريم صنداي',  e:'🍦', p:32,  d:'فانيليا مع صوص شوكولاتة أو فراولة.'}
+];
+const offers = [
+  {t:'بطاطس مجانًا', d:'بطاطس وسط مع أي وجبة.', c:100},
+  {t:'خصم 20%', d:'على أي ساندوتش دجاج.', c:60},
+  {t:'مشروب مجاني', d:'مشروب غازي مع أي طلب.', c:30}
+];
+let points = 0, cart = [], claimed = {};
+const $ = s => document.querySelector(s);
+const toast = m => { const t=$('#toast'); t.textContent=m; t.classList.add('on'); clearTimeout(toast.id); toast.id=setTimeout(()=>t.classList.remove('on'),2600); };
+
+function paint() {
+  $('#pts').textContent = points; $('#bigPts').textContent = points;
+  $('#cnt').textContent = cart.reduce((a,i)=>a+i.q,0);
+  const tiers=[100,250,500], nx=tiers.find(t=>points<t);
+  $('#fill').style.width = Math.min(100, points/5) + '%';
+  $('#bar').setAttribute('aria-valuenow', Math.min(100, points/5));
+  $('#nextTxt').textContent = nx ? `فاضلك ${nx-points} نقطة للمكافأة الجاية` : 'مبروك! وصلت لأعلى مستوى 🎉';
+  document.querySelectorAll('.offer button').forEach((b,i)=>{ b.disabled = !!claimed[i]; b.textContent = claimed[i] ? 'تم التفعيل ✓' : `استبدل بـ ${offers[i].c} نقطة`; });
+}
+function addToCart(name, price) {
+  const f = cart.find(i=>i.n===name);
+  f ? f.q++ : cart.push({n:name, p:price, q:1});
+  paint();
+  toast('تمت الإضافة للسلة');
+}
+
+$('#offerList').innerHTML = offers.map((o,i)=>`<div class="offer"><b>${o.t}</b><span>${o.d}</span><small>العرض ساري لمدة 7 أيام</small><button data-i="${i}"></button></div>`).join('');
+$('#offerList').onclick = e => { const i=e.target.dataset.i; if(i==null) return; const o=offers[i];
+  if(points<o.c) return toast('نقاطك مش كفاية لسه');
+  points-=o.c; claimed[i]=true; paint(); toast(`تم تفعيل: ${o.t}`); };
+
+$('#mealList').innerHTML = meals.map((m,i)=>`<div class="meal"><div class="e" aria-hidden="true">${m.e}</div><h3>${m.n}</h3><p>${m.d}</p><div class="row"><span class="price">${m.p} ج.م</span><button class="add" data-i="${i}">أضف</button></div></div>`).join('');
+$('#mealList').onclick = e => { const i=e.target.dataset.i; if(i!=null) addToCart(meals[i].n, meals[i].p); };
+
+const toys = {
+  messi:   {label:'مجسّم ميسي',   num:'10', txt:'مجسّم لاعب بقميص مقلّم سماوي وأبيض ورقم 10.'},
+  ronaldo: {label:'مجسّم رونالدو', num:'7',  txt:'مجسّم لاعب بقميص أحمر وأخضر ورقم 7.'},
+  mystery: {label:'هدية مفاجأة',   num:'?',  txt:'هدية مفاجأة جوه العلبة.'}
+};
+const v = n => document.querySelector(`input[name=${n}]:checked`).value;
+document.querySelectorAll('input[name=toy]').forEach(r => r.onchange = () => {
+  const k = v('toy'); $('#fig').className = 'fig ' + k; $('#fig').textContent = toys[k].num; $('#toyTxt').textContent = toys[k].txt;
+});
+$('#hmAdd').onclick = () => {
+  addToCart(`هابي ميل (${v('main')}، ${v('side')}، ${v('drink')}، ${toys[v('toy')].label})`, 70);
+};
+
+/* Branch QR */
+let atBranch = false, stream = null, scanTimer = null;
+function stopCam() { clearInterval(scanTimer); if (stream) { stream.getTracks().forEach(t => t.stop()); stream = null; } $('#cam').style.display = 'none'; }
+function drawBranch() {
+  $('#branchBar').innerHTML = atBranch
+    ? '<span class="ok">✓ تم التحقق من الفرع، العروض متاحة</span>'
+    : '<span>🔒 العروض دي جوه الفرع بس. امسح QR code الموجود في الفرع عشان تفعّلها.</span> <button class="btn" id="scanBtn">امسح QR الفرع</button>';
+}
+function unlock() { atBranch = true; stopCam(); if ($('#qr').open) $('#qr').close(); drawBranch(); drawDeals(); toast('تم التحقق من الفرع، العروض اتفعّلت ✓'); }
+async function openScan() {
+  $('#qr').showModal(); $('#qrCode').value = '';
+  $('#qrMsg').textContent = 'وجّه الكاميرا ناحية الـ QR code الموجود في الفرع.';
+  if (!('BarcodeDetector' in window) || !navigator.mediaDevices) { $('#qrMsg').textContent = 'متصفحك مش بيدعم مسح الكاميرا، اكتب كود الفرع بدل كده.'; return; }
+  try {
+    stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } });
+    const vd = $('#cam'); vd.srcObject = stream; vd.style.display = 'block'; await vd.play();
+    const det = new BarcodeDetector({ formats: ['qr_code'] });
+    scanTimer = setInterval(async () => {
+      try { const r = await det.detect(vd);
+        if (r.length) { /^MCD-BRANCH/i.test(r[0].rawValue) ? unlock() : $('#qrMsg').textContent = 'الـ QR ده مش بتاع فرع، جرّب تاني.'; } } catch (e) {}
+    }, 500);
+  } catch (e) { $('#qrMsg').textContent = 'مقدرناش نفتح الكاميرا، اكتب كود الفرع بدل كده.'; }
+}
+$('#branchBar').onclick = e => { if (e.target.id === 'scanBtn') openScan(); };
+$('#qrOk').onclick = () => /^MCD-BRANCH-\d+$/i.test($('#qrCode').value.trim()) ? unlock() : toast('كود الفرع غلط');
+$('#qrClose').onclick = () => $('#qr').close();
+$('#qr').addEventListener('close', stopCam);
+
+/* Deals (including share boxes) */
+const deals = [
+  {n:'كومبو برجر كلاسيك', e:'🍔🍟🥤', c:'sand', p:110, o:160, i:['🍔 برجر لحم','🍟 بطاطس وسط','🥤 بيبسي']},
+  {n:'كومبو دبل تشيز', e:'🍔🍟🥤', c:'sand', p:140, o:215, i:['🍔 دبل تشيز برجر','🍟 بطاطس كبيرة','🥤 بيبسي','🍦 صنداي']},
+  {n:'كومبو تشيكن كرسبي', e:'🍗🍟🥤', c:'sand', p:120, o:185, i:['🍗 تشيكن كرسبي','🍟 بطاطس وسط','🥤 بيبسي','🥧 فطيرة']},
+  {n:'كومبو ناجتس 9 قطع', e:'🍗🍟🥤', c:'nug', p:100, o:145, i:['🍗 ناجتس 9 قطع','🍟 بطاطس وسط','🥤 بيبسي','🥫 صوصين']},
+  {n:'كومبو المشاركة 20 ناجتس', e:'🍗🍟🥤', c:'nug', p:175, o:255, i:['🍗 ناجتس 20 قطعة','🍟 بطاطس كبيرة','🥤 2 بيبسي','🥫 2 صوص']},
+  {n:'كومبو ميكسولوجي برجر', e:'🍔🍟🍋', c:'mix', p:120, o:170, i:['🍔 برجر لحم','🍟 بطاطس وسط','🍋 موهيتو ليمون ونعناع']},
+  {n:'كومبو ميكسولوجي ناجتس', e:'🍗🍟🍓', c:'mix', p:110, o:160, i:['🍗 ناجتس 9 قطع','🍟 بطاطس وسط','🍓 فراولة سباركل']},
+  {n:'كومبو ميكسولوجي للمشاركة', e:'🍔🍗🍹', c:'mix', p:210, o:300, i:['🍔 برجر لحم','🍗 تشيكن كرسبي','🍟 بطاطس كبيرة','🍹 باشون فروت كولر','🧊 بلو لاجون']},
+  {n:'شير بوكس 3 ساندوتشات', e:'🍔🍗🍟🥤', c:'share', p:259, o:420, i:['🍔 3 ساندوتشات (برجر لحم، دبل تشيز، تشيكن كرسبي)','🍟 2 بطاطس كبيرة','🥤 كولا 2 لتر']},
+  {n:'شير بوكس 4 ساندوتشات', e:'🍔🍔🍟🥤', c:'share', p:329, o:500, i:['🍔 4 ساندوتشات (برجرين لحم، دبل تشيز، تشيكن كرسبي)','🍟 2 بطاطس كبيرة','🥤 كولا 2 لتر']}
+];
+const cats = {all:'الكل', sand:'كومبو ساندوتشات', nug:'كومبو ناجتس', mix:'ميكسولوجي', share:'شير بوكس'};
+let cat = 'all';
+function drawDeals() {
+  $('#filters').innerHTML = Object.entries(cats).map(([k,l])=>`<button data-k="${k}" aria-pressed="${k===cat}">${l}</button>`).join('');
+  $('#dealList').innerHTML = deals.map((m,i)=> (cat==='all'||m.c===cat) ? `<div class="meal deal"><div class="e" aria-hidden="true">${m.e}</div><span class="tag">وفّر ${m.o-m.p} ج.م</span><h3>${m.n}</h3><ul class="inc">${m.i.map(x=>`<li>${x}</li>`).join('')}</ul><div class="row"><span><span class="price">${m.p} ج.م</span><s class="old">${m.o}</s></span><button class="add" data-i="${i}">${atBranch ? 'أضف' : '🔒 امسح QR'}</button></div></div>` : '').join('');
+}
+$('#filters').onclick = e => { const k=e.target.dataset.k; if(k){ cat=k; drawDeals(); } };
+$('#dealList').onclick = e => { const i=e.target.dataset.i; if(i==null) return; atBranch ? addToCart(deals[i].n, deals[i].p) : openScan(); };
+drawDeals(); drawBranch();
+
+/* McDelivery: points are earned on payment (1 EGP = 1 point, delivery fee excluded) */
+let pending = null;
+function startOrder(sub, fee, how) {
+  const btn = $('#dlGo'), earned = sub, online = how === 'Apple Pay';
+  $('#dlSum').textContent = `الطلب ${sub} ج.م + التوصيل ${fee ? fee+' ج.م' : 'مجاني'} = ${sub+fee} ج.م (${online ? 'مدفوع بـ Apple Pay' : 'كاش عند الاستلام'}) ⭐ ${online ? 'كسبت' : 'هتكسب'} ${earned} نقطة`;
+  if (online) points += earned;
+  cart = []; paint(); btn.disabled = true;
+  $('#track').scrollIntoView({behavior:'smooth', block:'center'});
+  const steps = document.querySelectorAll('#track li'); steps.forEach(s=>s.classList.remove('on'));
+  steps.forEach((s,i)=>setTimeout(()=>{ s.classList.add('on');
+    if(i===steps.length-1){
+      if(!online){ points += earned; paint(); }
+      btn.disabled=false; toast(online ? 'وصل طلبك (محاكاة تجريبية) 🛵' : `وصل طلبك ودفعت كاش، وكسبت ${earned} نقطة 🛵`);
+    } }, i*1600));
+}
+const AR = '٠١٢٣٤٥٦٧٨٩';
+function fail(msg, el) { const er = $('#dlErr'); er.innerHTML = msg; er.hidden = false; document.querySelectorAll('.dl .bad').forEach(x=>x.classList.remove('bad')); if (el) { el.classList.add('bad'); el.focus(); } er.scrollIntoView({behavior:'smooth', block:'center'}); }
+$('#dlForm').onsubmit = e => {
+  e.preventDefault();
+  const er = $('#dlErr'); er.hidden = true;
+  const sub = cart.reduce((a,i)=>a+i.p*i.q,0);
+  if (!sub) return fail('السلة فاضية. <a href="#meals">اختار وجبتك الأول</a> وبعدها اطلب.');
+  if (!$('#area').value) return fail('اختار منطقتك الأول.', $('#area'));
+  if ($('#addr').value.trim().length < 5) return fail('اكتب عنوانك بالتفصيل (الشارع ورقم العمارة).', $('#addr'));
+  const ph = $('#phone').value.replace(/[٠-٩]/g, d => AR.indexOf(d)).replace(/\s|-/g, '');
+  if (!/^01[0-9]{9}$/.test(ph)) return fail('اكتب رقم موبايل صحيح من 11 رقم يبدأ بـ 01.', $('#phone'));
+  document.querySelectorAll('.dl .bad').forEach(x=>x.classList.remove('bad'));
+  const fee = sub>=150 ? 0 : 15, how = document.querySelector('input[name=pay]:checked').value;
+  if (how === 'Apple Pay') { pending = {sub, fee}; $('#payAmt').textContent = (sub+fee) + ' ج.م'; $('#pay').showModal(); }
+  else startOrder(sub, fee, how);
+};
+$('#payOk').onclick = () => {
+  const b = $('#payOk'); b.disabled = true; b.textContent = 'جاري الدفع...';
+  setTimeout(() => {
+    const p = pending; b.disabled = false; b.textContent = 'تأكيد الدفع'; $('#pay').close();
+    startOrder(p.sub, p.fee, 'Apple Pay'); toast(`تم الدفع بنجاح ✓ وكسبت ${p.sub} نقطة`);
+  }, 1200);
+};
+$('#payNo').onclick = () => $('#pay').close();
+document.querySelectorAll('input[name=pay]').forEach(r => r.onchange = () => {
+  const ap = document.querySelector('input[name=pay]:checked').value === 'Apple Pay';
+  $('#dlGo').textContent = ap ? 'ادفع بـ Apple Pay' : 'اطلب توصيل (كاش)'; $('#dlGo').classList.toggle('applepay', ap);
+});
+
+/* Cart */
+function drawCart() {
+  $('#cartItems').innerHTML = cart.length ? cart.map((i,k)=>`<div class="line"><span>${i.n} × ${i.q}</span><span>${i.p*i.q} ج.م <button data-k="${k}" aria-label="حذف">حذف</button></span></div>`).join('') : '<p>السلة فاضية.</p>';
+  $('#total').textContent = cart.reduce((a,i)=>a+i.p*i.q,0) + ' ج.م';
+}
+$('#cartBtn').onclick = () => { drawCart(); $('#dlg').showModal(); };
+$('#close').onclick = () => $('#dlg').close();
+$('#cartItems').onclick = e => { const k=e.target.dataset.k; if(k==null) return; cart.splice(k,1); drawCart(); paint(); };
+$('#checkout').onclick = () => { if(!cart.length) return toast('ضيف حاجة للسلة الأول'); $('#dlg').close(); $('#delivery').scrollIntoView({behavior:'smooth'}); toast('كمّل بيانات التوصيل واضغط ادفع'); };
+
+/* Memory game (60s timer + gift) */
+let first=null, lock=false, moves=0, matched=0, left=60, tm=null, over=false;
+const gifts = [{n:'بطاطس وسط', e:'🍟'}, {n:'بيبسي', e:'🥤'}];
+const stopT = () => { clearInterval(tm); tm = null; };
+function newGame() {
+  stopT();
+  const s = ['🍔','🍟','🥤','🍦','🍗','🥧']; const deck=[...s,...s].sort(()=>Math.random()-.5);
+  first=null; lock=false; moves=0; matched=0; left=60; over=false;
+  $('#moves').textContent=0; $('#time').textContent=60; $('#tbar').style.width='100%'; $('#prize').textContent='';
+  $('#game').innerHTML = deck.map(c=>`<button class="card" data-c="${c}" aria-label="كارت">${c}</button>`).join('');
+}
+function tick() {
+  left--; $('#time').textContent = left; $('#tbar').style.width = (left/60*100) + '%';
+  if (left <= 0) { stopT(); over = true; $('#prize').textContent = 'خلص الوقت ⏱️ جرّب تاني!'; toast('خلص الوقت! جرّب تاني'); }
+}
+$('#game').onclick = e => {
+  const c=e.target.closest('.card'); if(!c||over||lock||c===first||c.classList.contains('done')) return;
+  if(!tm) tm = setInterval(tick, 1000);
+  c.classList.add('up');
+  if(!first){ first=c; return; }
+  moves++; $('#moves').textContent=moves;
+  if(first.dataset.c===c.dataset.c){
+    first.classList.replace('up','done'); c.classList.replace('up','done'); first=null; matched++;
+    if(matched===6){
+      stopT(); over = true; points += 30;
+      const g = gifts[Math.floor(Math.random()*gifts.length)];
+      cart.push({n:`🎁 ${g.n} (هدية اللعبة)`, p:0, q:1}); paint();
+      $('#prize').textContent = `كسبت في ${60-left} ثانية! هديتك: ${g.n} ${g.e} اتضافت للسلة، ومعاها 30 نقطة 🎉`;
+      toast(`كسبت هدية: ${g.n} ${g.e}`);
+    }
+  } else { lock=true; setTimeout(()=>{ first.classList.remove('up'); c.classList.remove('up'); first=null; lock=false; },700); }
+};
+$('#again').onclick = newGame;
+
+newGame(); paint();
+</script>
+</body>
+</html>
